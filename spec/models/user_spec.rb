@@ -71,7 +71,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
       it 'first_nameが全角漢字・ひらがな・カタカナでない場合は登録できない' do
-        tests = ['tarou', 'ｔａｒｏｕ', '0000', '００００', '$$$$', '＄＄＄＄','ﾀﾛｳ']
+        tests = ['tarou', 'ｔａｒｏｕ', '0000', '００００', '$$$$', '＄＄＄＄', 'ﾀﾛｳ']
         tests.each do |test|
           @user.first_name = test
           @user.valid?
@@ -97,7 +97,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Last name kana can't be blank")
       end
       it 'first_name_kanaが全角カタカナでない場合は登録できない' do
-        tests = ['tarou', 'ｔａｒｏｕ', '0000', '００００', '$$$$', '＄＄＄＄','ﾀﾛｳ', '太郎', 'たろう']
+        tests = ['tarou', 'ｔａｒｏｕ', '0000', '００００', '$$$$', '＄＄＄＄', 'ﾀﾛｳ', '太郎', 'たろう']
         tests.each do |test|
           @user.first_name_kana = test
           @user.valid?
