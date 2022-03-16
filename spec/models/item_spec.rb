@@ -58,20 +58,20 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが300~9999999以外では出品できない' do
-        tests = [299, 10000000, Faker::Number.within(range: 0..298), Faker::Number.within(range: 10000001..99999999)]
+        tests = [299, 10_000_000, Faker::Number.within(range: 0..298), Faker::Number.within(range: 10_000_001..99_999_999)]
         tests.each do |test|
           @item.price = test
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is out of setting range")
-        end       
+          expect(@item.errors.full_messages).to include('Price is out of setting range')
+        end
       end
       it 'priceが半角数値以外では出品できない' do
-        tests = ['３０００', '3,000', '¥3000', '￥３０００','threethousand', '三千', 'さんぜん', 'サンゼン', 'ｻﾝｾﾞﾝ']
+        tests = ['３０００', '3,000', '¥3000', '￥３０００', 'threethousand', '三千', 'さんぜん', 'サンゼン', 'ｻﾝｾﾞﾝ']
         tests.each do |test|
           @item.price = test
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
-        end      
+          expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+        end
       end
     end
   end
