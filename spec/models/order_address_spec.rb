@@ -48,7 +48,7 @@ RSpec.describe Order, type: :model do
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberが半角数値でないと購入できない' do
-        tests = ['０９０１２３４５６７８', '090-1234-5678']
+        tests = %w[０９０１２３４５６７８ 090-1234-5678]
         tests.each do |test|
           @order_address.phone_number = test
           @order_address.valid?
